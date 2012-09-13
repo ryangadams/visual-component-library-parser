@@ -28,7 +28,15 @@ class VisualComponent
 	
 	def user_story
 		get_element_after "h1[text()*='User Story']"
-	end   
+	end  
+	
+	def jira
+		searchString = "[text()*='Jira Links']"
+		els = @component_html.search searchString
+		el = els.first       
+		el = el.parent if el.node_name == "b"               
+		el.next_element.at_css("a.external-link")["href"] if el.next_element.at_css("a.external-link")
+	end 
 	
 	def design_grab
 		searchString = "[text()*='Design Screen-grab']"
@@ -51,6 +59,7 @@ class VisualComponent
 		{     
 			"status" => status,
 			"url" => @component_url,
+			"jira" => jira,
 			"code" => component_code,
 			"overview" => overview,
 			"user_story" => user_story,
