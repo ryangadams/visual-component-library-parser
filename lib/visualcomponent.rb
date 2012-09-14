@@ -52,7 +52,7 @@ class VisualComponent
 		el = els.first
 		el = el.next_sibling
 		el = el.next_sibling if el.node_name == "br"
-		el.content.strip
+		el.inner_text.strip
 	end
 	
 	def to_json
@@ -72,6 +72,6 @@ class VisualComponent
 		els  = @component_html.search searchString
 		el   = els.first       
 		return "" unless el
-		el.next_element.content
+		el.next_element.inner_text.strip
 	end
 end
