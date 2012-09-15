@@ -18,6 +18,8 @@ function load() {
     el.setAttribute("data-json", JSON.stringify(t));
     el.addEventListener("click", function(){
       json = JSON.parse(this.getAttribute("data-json"));
+      document.getElementById("component-name").innerHTML = "Component: <span class=\"code\">" + json["code"] + 
+        "</span> " + json["name"] + "<a href=\"" + json["url"] + "\">Full Detail</a>";
       document.getElementById("explorer").setAttribute(
           "src", 
           'https://pal.int.bbc.co.uk/kandlroute/developers/staticlibrary/'+json["code"]
@@ -26,7 +28,10 @@ function load() {
     }, false);
                                        
   };                                   
-  
+  var title = document.createElement("h1");
+  title.setAttribute("id", "component-name");
+  title.innerHTML = "Component Library";
+  document.body.appendChild(title);
   var pane = document.createElement("iframe");
   pane.setAttribute("id","explorer");
   document.body.appendChild(pane);                         

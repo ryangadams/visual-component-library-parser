@@ -20,7 +20,7 @@
   display:block;
   margin:2px;
 }
-.code{font-weight:bold;}
+.code{font-weight:bold;color:#00cc33;}
 li a{padding:3px;}
 li a:hover{font-style:italic;background:#fff;}
 .Draft{border-color:orange;}
@@ -28,11 +28,21 @@ li a:hover{font-style:italic;background:#fff;}
 #explorer{
   border:1px solid red;
   position:fixed;
-  top:0px;
+  top:60px;
   right:0px;
   left:250px;
   bottom:0px;
   margin:10px;
   min-width:60%;
   min-height:80%;
+}   
+
+#component-name{position:fixed;
+  top:0px;
+  left:250px;
+  padding:10px;
+  margin:0px;
+  font-size:1.6em; 
+  font-weight:normal;
 }
+#component-name a{font-size:0.7em;display:block;}
