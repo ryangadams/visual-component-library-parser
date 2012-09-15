@@ -2,18 +2,22 @@ require 'BBCFileFetcher.rb'
 require 'nokogiri' 
 require 'json'
 
+# parsing class for Wiki Pages I'm targetting
+# Visual Component Library
 class VisualComponent     
 	include BBCFileFetcher
-	                                                                
+	                           
+	# css rule to target the contents of the page                                     
 	@@wiki_content = '.wiki-content'                              
+	# url of your confluence space for url generation
 	@@confluence = 'https://confluence.dev.bbc.co.uk'
 	
 	attr_accessor :component_name, :component_url, :component_html
 	
 	def initialize(url, name)
-		@component_url = url
+		@component_url = @@confluence + url
 		@component_name = name
-		@component_html = Nokogiri::HTML(fetch(url)).css(@@wiki_content)
+		@component_html = Nokogiri::HTML(fetch(@component_url)).css(@@wiki_content)
 		if component_code == ""
        raise "Can't create a component from '#{url}'"
 		end
@@ -54,7 +58,7 @@ class VisualComponent
 		el = el.next_sibling if el.node_name == "br"
 		el.inner_text.strip
 	end
-	
+
 	def to_json
 		{     
 			"status" => status,
@@ -67,7 +71,12 @@ class VisualComponent
 		}.to_json
 	end
 	
-	private 
+	private            
+	# takes a css or xpath string to get the header
+	# and returns the contents of the next element
+	# i.e. 
+	# h1 HEADER
+	# p content
 	def get_element_after(searchString)
 		els  = @component_html.search searchString
 		el   = els.first       
