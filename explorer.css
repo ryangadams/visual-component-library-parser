@@ -1,0 +1,15 @@
+
+p {
+    width: 15em;
+    font-size: 70%;
+    margin: 4px;
+    padding: 10px;
+    float: left;
+    max-height: 20em;
+    overflow: hidden;
+    border: 1px dashed;
+    height: 4em;
+}
+.code{font-weight:bold;}
+p a{display:block;}
+.Draft{border-color:orange;}

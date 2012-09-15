@@ -4,7 +4,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'BBCFileFetcher.rb'
 require 'visualcomponent.rb'
-
+require 'explorer.rb'
 
 # the page to start parsing from
 source_url = "https://confluence.dev.bbc.co.uk/display/unifiedplace/test"
@@ -18,6 +18,7 @@ doc = Nokogiri::HTML(source)
 library_directory = File.join(Dir.home, "kandlcurriculum-visual-component-library")
 Dir.mkdir(library_directory) unless File.directory?(library_directory)
 
+components = Array.new
 doc.css(links).each do |link|
 	begin
 		component = VisualComponent.new(link["href"], link.content)
@@ -25,7 +26,10 @@ doc.css(links).each do |link|
 		component_file = File.join(library_directory, component.component_code) + '.json'
 		puts "writing #{component_file}" unless $silent
 		File.open("#{component_file}", "w") { |f| f.write(component.to_json) }
+		components.push component
 	rescue
 		puts $!
 	end
-end
+end                                     
+
+LibraryExplorer.render_html(components)
