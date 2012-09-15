@@ -65,6 +65,7 @@ class VisualComponent
 			"url" => @component_url,
 			"jira" => jira,
 			"code" => component_code,
+			"name" => @component_name,
 			"overview" => overview,
 			"user_story" => user_story,
 			"design" => design_grab
