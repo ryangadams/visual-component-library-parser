@@ -28,7 +28,7 @@ doc.css(links).each do |link|
 		File.open("#{component_file}", "w") { |f| f.write(component.to_json) }
 		components.push component
 	rescue
-		puts "\033[31m" + $! + "\033[0m" # in red
+		puts "\033[31m" + $!.message + "\033[0m" # in red
 	end
 end                                     
 
