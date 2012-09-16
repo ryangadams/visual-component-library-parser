@@ -1,5 +1,7 @@
-                  
-#component-list{  
+body{
+  font-family:"Helvetica", sans-serif;
+}                  
+#component-list{          
   float:left;
   list-style:none;
   width:15em;
@@ -24,6 +26,20 @@
 li a{padding:3px;}
 li a:hover{font-style:italic;background:#fff;}
 .Draft{border-color:orange;}
+         
+#component-summary{
+  position:fixed;
+  top:60px;
+  right:0px;
+  left:250px;
+  bottom:0px;
+  margin:10px;
+  width:700px;
+  overflow:auto;
+  min-height:80%;
+}              
+
+#component-summary img{width:90%;padding:10px 0px;margin:0px auto;border:2px solid #999;display:block;}
 
 #explorer{
   border:1px solid red;
@@ -34,16 +50,23 @@ li a:hover{font-style:italic;background:#fff;}
   bottom:0px;
   margin:10px;
   width:320px;
-  min-height:80%;
+  min-height:80%;                                                         
+  visibility: hidden;
 }   
-
+h1 {
+  font-size:1.6em; 
+  font-weight:normal;
+}
+h2 {
+  font-size:1.4em;
+  font-weight:normal;
+}
 #component-name{position:fixed;
   top:0px;
   left:250px;
   padding:10px;
   margin:0px;
-  font-size:1.6em; 
-  font-weight:normal;
+  
 }
 #component-name p{font-size:0.6em;margin:0px;}
 #breakpoint-container{position:fixed;bottom:0px;right:0px;font-size:0.7em;}
