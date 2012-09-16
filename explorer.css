@@ -45,4 +45,4 @@ li a:hover{font-style:italic;background:#fff;}
   font-size:1.6em; 
   font-weight:normal;
 }
-#component-name a{font-size:0.7em;display:block;}
+#component-name p{font-size:0.6em;margin:0px;}
