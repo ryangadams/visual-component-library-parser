@@ -48,8 +48,13 @@ class VisualComponent
 		searchString = "[text()*='Design Screen-grab']"
 		els = @component_html.search searchString
 		el = els.first       
-		el = el.parent if el.node_name == "b"               
-		@@confluence + el.next_element.at_css("img")["src"] if el.next_element.at_css("img")
+		el = el.parent if el.node_name == "b"
+		design = Array.new
+		while el.next_element.node_name != "h1"               
+			el = el.next_element
+			design.push @@confluence + el.at_css("img")["src"] if el.at_css("img")
+		end                                                       
+		design
 	end          
 	
 	def status             
