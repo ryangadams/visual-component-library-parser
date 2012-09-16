@@ -22,7 +22,8 @@ function load() {
   var pane = document.createElement("iframe");
   pane.setAttribute("id","explorer");
   document.body.appendChild(pane);                         
-  pane.appendChild(document.createTextNode("Details go here"));
+  pane.appendChild(document.createTextNode("Details go here")); 
+  setUpBreakpoints();
 }
 
 document.addEventListener("DOMContentLoaded", load, false);
@@ -64,12 +65,37 @@ function setUpOpenInIframe() {
 }
 
 function openLinkInIframe(e) {
+  if (this.className.indexOf("-ac") > -1) {
+    // cucumber file display
+    document.getElementById("resize-800").click();
+  }
+  if (this.className.indexOf("-preview") > -1) {
+    // test-harness display
+    document.getElementById("resize-320").click();
+  }
   document.getElementById("explorer").setAttribute("src", this.getAttribute("href"));
-    e.preventDefault();                                                                
+  e.preventDefault();                                                                
 }
 
 /* make the iframe resize to various widths */
 function setUpBreakpoints() {
-  var breakpoints = [320, 400, 600, 768, 1024];
-  
+  var breakpoints = [320, 400, 600, 768, 800, 1024];
+  var b = document.createElement("p");
+  b.appendChild(document.createTextNode("Resize Preview: "));
+  b.setAttribute("id", "breakpoint-container");
+  for (var i = breakpoints.length - 1; i >= 0; i--){ 
+    var l = document.createElement("a");
+    l.appendChild(document.createTextNode(breakpoints[i]));
+    l.setAttribute("href", "#resize-" + breakpoints[i]);
+    l.setAttribute("id", "resize-" + breakpoints[i]);
+    b.appendChild(l);
+    l.addEventListener("click", resize, false);
+  };
+  document.body.appendChild(b);
+}                                              
+
+function resize(e) {
+  e.preventDefault();
+  var size = this.getAttribute('href').split("-")[1];
+  document.getElementById("explorer").style.width =  size + "px";
 }

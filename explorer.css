@@ -33,7 +33,7 @@ li a:hover{font-style:italic;background:#fff;}
   left:250px;
   bottom:0px;
   margin:10px;
-  min-width:60%;
+  width:320px;
   min-height:80%;
 }   
 
@@ -46,3 +46,5 @@ li a:hover{font-style:italic;background:#fff;}
   font-weight:normal;
 }
 #component-name p{font-size:0.6em;margin:0px;}
+#breakpoint-container{position:fixed;bottom:0px;right:0px;font-size:0.7em;}
+#breakpoint-container a{padding:0px 4px;}
