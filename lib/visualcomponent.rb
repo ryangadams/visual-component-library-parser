@@ -33,7 +33,9 @@ class VisualComponent
 	def user_story
 		get_element_after "h1[text()*='User Story']"
 	end  
-	
+	def cucumber_link
+		get_element_after "h1[text()*='Acceptance Criteria']"
+	end
 	def jira
 		searchString = "[text()*='Jira Links']"
 		els = @component_html.search searchString
@@ -68,6 +70,7 @@ class VisualComponent
 			"name" => @component_name,
 			"overview" => overview,
 			"user_story" => user_story,
+			"cucumber" => cucumber_link,
 			"design" => design_grab
 		}.to_json
 	end
