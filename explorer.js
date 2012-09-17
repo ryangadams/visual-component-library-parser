@@ -1,13 +1,22 @@
+var get = function(selector) {
+  return document.querySelector(selector);
+};
+var getAll = function(selector) {
+  return document.querySelectorAll(selector);
+};
+var make = function(element) {
+  return document.createElement(element);
+};
 
 function load() {                 
-  var container = document.createElement("ul");
+  var container = make("ul");
   container.setAttribute("id", "component-list");
   document.body.appendChild(container);
   components["components"].sort(function(a, b){
     return a["code"] < b["code"] ? 1 : -1;
   });
   for (var i = components["components"].length - 1; i >= 0; i--){
-    var el = document.createElement("li");             
+    var el = make("li");             
     var t = components["components"][i];
     var content = '<span><a class="code" href="' + t["url"] + '">' + t["code"] + "</a>";
     content += t["name"] + "</span>";
@@ -18,32 +27,24 @@ function load() {
     el.addEventListener("click", showComponentDetail, false);
                                        
   };                                   
-  var title = document.createElement("h1");
+  var title = make("h1");
   title.setAttribute("id", "component-name");
   title.innerHTML = "Component Library";
   document.body.appendChild(title);
-  var summary = document.createElement("div");
+  var summary = make("div");
   summary.setAttribute("id", "component-summary");
   document.body.appendChild(summary);
-  var pane = document.createElement("iframe");
+  var pane = make("iframe");
   pane.setAttribute("id","explorer");
   document.body.appendChild(pane);                         
   pane.appendChild(document.createTextNode("Details go here")); 
   setUpBreakpoints();
 }
-
-document.addEventListener("DOMContentLoaded", load, false);
+                                                           
 
 function showComponentDetail(e) {
-  // hide the iframe
-  var iframe = document.getElementById("explorer");
-  iframe.style.visibility = null;       
-  // hide the resizer
-  var resizer = document.getElementById("breakpoint-container");
-  resizer.style.visibility = null;
-  // show the summary
-  var summary = document.getElementById("component-summary");
-  summary.style.visibility = null;
+  e.preventDefault();
+  hidePreviewPaneAndShowOverview();
   json = JSON.parse(this.getAttribute("data-json"));
                                                         
   var content = "Component: <span class=\"code\">" + json["code"] + 
@@ -75,38 +76,30 @@ function showComponentDetail(e) {
       summary += "<p>" + decodeURIComponent(imgname) + "</p><a href=\""+img+"\"><img src=\"" + img + "\"/></a>"
     };
   }
-  document.getElementById("component-name").innerHTML = content;
-  document.getElementById("component-summary").innerHTML = summary;
-  
-  // document.getElementById("explorer").setAttribute(
-  //       "src", 
-  //       'https://pal.int.bbc.co.uk/kandlroute/developers/staticlibrary/'+json["code"]
-  //   );            
+  get("#component-name").innerHTML = content;
+  get("#component-summary").innerHTML = summary;
+ 
   setUpOverviewLink();
   setUpOpenInIframe();  
 }
 
 function setUpOpenInIframe() {
-  var links = document.querySelectorAll("a.open-in-iframe");
+  var links = getAll("a.open-in-iframe");
   for (var i = links.length - 1; i >= 0; i--){
     links[i].addEventListener("click", openLinkInIframe, false);
   };
 }
 
-function openLinkInIframe(e) {
-  var iframe = document.getElementById("explorer");
-  iframe.style.visibility = "visible";
-  var resizer = document.getElementById("breakpoint-container");
-  resizer.style.visibility = "visible";             
-  var summary = document.getElementById("component-summary");
-  summary.style.visibility = "hidden";
+function openLinkInIframe(e) { 
+  var iframe = get("#explorer");
+  showPreviewPaneAndHideOverview();
   if (this.className.indexOf("-ac") > -1) {
     // cucumber file display
-    document.getElementById("resize-800").click();
+    get("#resize-800").click();
   }
   if (this.className.indexOf("-preview") > -1) {
     // test-harness display
-    document.getElementById("resize-320").click();
+    get("#resize-320").click();
   }
   iframe.setAttribute("src", this.getAttribute("href"));
   e.preventDefault();                                                                
@@ -115,11 +108,11 @@ function openLinkInIframe(e) {
 /* make the iframe resize to various widths */
 function setUpBreakpoints() {
   var breakpoints = [320, 400, 600, 768, 800, 1024];
-  var b = document.createElement("p");
+  var b = make("p");
   b.appendChild(document.createTextNode("Resize Preview: "));
   b.setAttribute("id", "breakpoint-container");
   for (var i = breakpoints.length - 1; i >= 0; i--){ 
-    var l = document.createElement("a");
+    var l = make("a");
     l.appendChild(document.createTextNode(breakpoints[i]));
     l.setAttribute("href", "#resize-" + breakpoints[i]);
     l.setAttribute("id", "resize-" + breakpoints[i]);
@@ -132,15 +125,32 @@ function setUpBreakpoints() {
 function setUpOverviewLink() {
   link = document.querySelector("a.overview");
   link.addEventListener("click", function(e){
-    var iframe = document.getElementById("explorer");
-    iframe.style.visibility = null;       
-    var summary = document.getElementById("component-summary");
-    summary.style.visibility = null;
+    hidePreviewPaneAndShowOverview();
     e.preventDefault();
   }, false);
 }
 function resize(e) {
   e.preventDefault();
   var size = this.getAttribute('href').split("-")[1];
-  document.getElementById("explorer").style.width =  size + "px";
+  get("#explorer").style.width =  size + "px";
 }
+
+function hidePreviewPaneAndShowOverview() {
+  var iframe = get("#explorer");
+  iframe.style.visibility = null;
+  var resizer = get("#breakpoint-container");
+  resizer.style.visibility = null;
+  var summary = get("#component-summary");
+  summary.style.visibility = null;
+}
+function showPreviewPaneAndHideOverview() {
+  var iframe = get("#explorer");
+  iframe.style.visibility = "visible";
+  var resizer = get("#breakpoint-container");
+  resizer.style.visibility = "visible";             
+  var summary = get("#component-summary");
+  summary.style.visibility = "hidden";
+}
+
+
+document.addEventListener("DOMContentLoaded", load, false);
