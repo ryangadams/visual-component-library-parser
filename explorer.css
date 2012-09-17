@@ -71,5 +71,5 @@ h2 {
   
 }
 #component-name p{font-size:0.6em;margin:0px;}
-#breakpoint-container{position:fixed;bottom:0px;right:0px;font-size:0.7em;}
+#breakpoint-container{position:fixed;bottom:0px;right:0px;font-size:0.7em;visibility:hidden;}
 #breakpoint-container a{padding:0px 4px;}

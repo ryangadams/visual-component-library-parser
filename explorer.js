@@ -35,8 +35,13 @@ function load() {
 document.addEventListener("DOMContentLoaded", load, false);
 
 function showComponentDetail(e) {
+  // hide the iframe
   var iframe = document.getElementById("explorer");
   iframe.style.visibility = null;       
+  // hide the resizer
+  var resizer = document.getElementById("breakpoint-container");
+  resizer.style.visibility = null;
+  // show the summary
   var summary = document.getElementById("component-summary");
   summary.style.visibility = null;
   json = JSON.parse(this.getAttribute("data-json"));
@@ -90,7 +95,9 @@ function setUpOpenInIframe() {
 
 function openLinkInIframe(e) {
   var iframe = document.getElementById("explorer");
-  iframe.style.visibility = "visible";             
+  iframe.style.visibility = "visible";
+  var resizer = document.getElementById("breakpoint-container");
+  resizer.style.visibility = "visible";             
   var summary = document.getElementById("component-summary");
   summary.style.visibility = "hidden";
   if (this.className.indexOf("-ac") > -1) {
