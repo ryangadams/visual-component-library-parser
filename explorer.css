@@ -1,6 +1,8 @@
 body{
   font-family:"Helvetica", sans-serif;
 }                  
+a{color:#000088;}
+a:hover{text-decoration:none;}
 #component-list{          
   float:left;
   list-style:none;
