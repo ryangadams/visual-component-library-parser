@@ -79,8 +79,8 @@ function showComponentDetail(e) {
     };
   }
   get("#component-name").innerHTML = content;
-  get("#component-summary").innerHTML = summary;
-
+  get("#component-summary").innerHTML = summary;         
+  buildAndAdd("div", "component-status", json["status"]);
   setUpOverviewLink();
   setUpOpenInIframe();
 }

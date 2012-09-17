@@ -73,3 +73,9 @@ h2 {
 #component-name p{font-size:0.6em;margin:0px;}
 #breakpoint-container{position:fixed;bottom:0px;right:0px;font-size:0.7em;visibility:hidden;}
 #breakpoint-container a{padding:0px 4px;}
+#component-status{position:fixed;top:40px;right:-150px;padding:1em 4em;background:#FFBF00;
+  -webkit-transform: rotate(45deg); 
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  width:300px;text-align:center;}
