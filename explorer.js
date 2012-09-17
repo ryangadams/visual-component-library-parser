@@ -138,20 +138,14 @@ function resize(e) {
 }
 
 function hidePreviewPaneAndShowOverview() {
-  var iframe = get("#explorer");
-  iframe.style.visibility = null;
-  var resizer = get("#breakpoint-container");
-  resizer.style.visibility = null;
-  var summary = get("#component-summary");
-  summary.style.visibility = null;
+  get("#explorer").style.visibility = null;
+  get("#breakpoint-container").style.visibility = null;
+  get("#component-summary").style.visibility = null;
 }
 function showPreviewPaneAndHideOverview() {
-  var iframe = get("#explorer");
-  iframe.style.visibility = "visible";
-  var resizer = get("#breakpoint-container");
-  resizer.style.visibility = "visible";
-  var summary = get("#component-summary");
-  summary.style.visibility = "hidden";
+  get("#explorer").style.visibility = "visible";
+  get("#breakpoint-container").style.visibility = "visible";
+  get("#component-summary").style.visibility = "hidden";
 }
 
 
