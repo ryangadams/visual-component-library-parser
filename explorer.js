@@ -37,7 +37,7 @@ function makeComponentItem(t) {
   var content = '<span><a class="code" href="' + t["url"] + '">' + t["code"] + "</a>";
   content += t["name"] + "</span>";
   el.innerHTML = content;
-  el.className = t["status"];
+  el.className = t["status"].toLowerCase().trim();
   el.setAttribute("data-json", JSON.stringify(t));
   el.addEventListener("click", showComponentDetail, false);
   return el;
