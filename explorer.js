@@ -134,7 +134,7 @@ function setUpOverviewLink() {
 function resize(e) {
   e.preventDefault();
   var size = this.getAttribute('href').split("-")[1];
-  get("#explorer").style.width =  size + "px";
+  get("#explorer").style.width = (parseInt(size,10) + 15) + "px";
 }
 
 function hidePreviewPaneAndShowOverview() {
