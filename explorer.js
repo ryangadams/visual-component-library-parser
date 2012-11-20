@@ -101,7 +101,7 @@ function showComponentDetail(e) {
     content += '<a class="jira" href="' + json["jira"] + '">' + jira + "</a>";
   }
   content += "</p>";
-  var summary = "<p>" + json["overview"] + "</p>";
+  var summary = "<p>" + json["overview"].replace(/</g, "&lt;") + "</p>";
   if (json["child_components"].length > 0) {
     summary += "<h2>Child Components</h2>";
     summary += '<ul class="child-components">';
