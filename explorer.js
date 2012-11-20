@@ -109,7 +109,7 @@ function showComponentDetail(e) {
   get("#component-name").innerHTML = content;
   get("#component-summary").innerHTML = summary;         
   var status = buildAndAdd("div", "component-status", json["status"]);
-  status.className = status.textContent.toLowerCase().replace(" ", "-");
+  status.className = status.textContent.toLowerCase().trim().replace(" ", "-");
   setUpOverviewLink();
   setUpOpenInIframe();
   setUpChildComponentLinks();
