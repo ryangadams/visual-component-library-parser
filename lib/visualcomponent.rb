@@ -76,9 +76,11 @@ class VisualComponent
 	def status             
 		searchString = ".infoMacro td b[text()*='Status']"
 		els = @component_html.search searchString
+		return "unknown" unless els
 		el = els.first
 		el = el.next_sibling
 		el = el.next_sibling if el.node_name == "br"
+		el = el.next_sibling if el.text? && el.inner_text.strip == ""
 		el.inner_text.strip
 	end
 
