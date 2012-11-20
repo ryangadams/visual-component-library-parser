@@ -21,10 +21,14 @@ function load() {
   };
 }
 function buildAndAdd(element, id, innerHTML) {
-  var el = make(element);
+  var el = get("#" + id);
+  if (el) {
+      el.parentNode.removeChild(el);
+  }
+  el = make(element);
   el.setAttribute("id", id);
-  el.innerHTML = innerHTML
   document.body.appendChild(el);
+  el.innerHTML = innerHTML
   return el;
 }
 function sortComponentsByCode() {
@@ -43,12 +47,20 @@ function makeComponentItem(t) {
   return el;
 }
 
+function findComponentByName(name) {
+    for (var i=0;i<components["components"].length;i++) {
+        if(components["components"][i]["name"] == name.trim()) {
+            return components["components"][i];
+        }
+    }
+    return false;
+}
 
 function showComponentDetail(e) {
   e.preventDefault();
   hidePreviewPaneAndShowOverview();
   json = JSON.parse(this.getAttribute("data-json"));
-
+  console.log(json);
   var content = "Component: <span class=\"code\">" + json["code"] +
     "</span> " + json["name"] + "<p>" +
     "<a class=\"overview\" href=\"overview\">Overview</a>&nbsp;|&nbsp;" +
@@ -69,6 +81,22 @@ function showComponentDetail(e) {
   }
   content += "</p>";
   var summary = "<p>" + json["overview"] + "</p>";
+  if (json["child_components"].length > 0) {
+    summary += "<h2>Child Components</h2>";
+    summary += '<ul class="child-components">';
+    for (var child=0; child < json["child_components"].length; child++) {
+      var component = json["child_components"][child];
+      var comp = findComponentByName(component);
+      if(comp) {
+          var tmp = document.createElement("div");
+          tmp.appendChild(makeComponentItem(comp));
+          summary += tmp.innerHTML;
+      } else {
+          summary += "<li>"+ component +"</li>";
+      }
+    };  
+    summary += "</ul>";
+  }
   if (json["design"].length > 0) {
     summary += "<h2>Design Samples</h2>";
     for (var i=0; i < json["design"].length; i++) {
@@ -80,11 +108,19 @@ function showComponentDetail(e) {
   }
   get("#component-name").innerHTML = content;
   get("#component-summary").innerHTML = summary;         
-  buildAndAdd("div", "component-status", json["status"]);
+  var status = buildAndAdd("div", "component-status", json["status"]);
+  status.className = status.textContent.toLowerCase().replace(" ", "-");
   setUpOverviewLink();
   setUpOpenInIframe();
+  setUpChildComponentLinks();
 }
 
+function setUpChildComponentLinks() {
+    var links = getAll(".child-components li");
+    for(var i=0;i<links.length;i++) {
+        links[i].addEventListener("click", showComponentDetail, false);
+    }
+}
 function setUpOpenInIframe() {
   var links = getAll("a.open-in-iframe");
   for (var i = links.length - 1; i >= 0; i--){
