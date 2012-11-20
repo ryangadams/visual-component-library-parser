@@ -50,10 +50,10 @@ class VisualComponent
 		el = els.first       
 		el = get_parent_if_necessary(el, "b")
 		design = Array.new
-		while el.next_element.node_name != "h1"               
+		while el.next_element && el.next_element.node_name != "h1"
 			el = el.next_element
 			design.push @@confluence + el.at_css("img")["src"] if el.at_css("img")
-		end                                                       
+	  end                                                       
 		design
 	end          
 	
