@@ -35,7 +35,8 @@ function load() {
   sortComponentsByCode();
   for (var i = components["components"].length - 1; i >= 0; i--){
     container.appendChild(makeComponentItem(components["components"][i]));
-  };
+  };          
+  pullPagesToTop();
 }
 function buildAndAdd(element, id, innerHTML) {
   var el = get("#" + id);
@@ -52,6 +53,16 @@ function sortComponentsByCode() {
   components["components"].sort(function(a, b){
     return a["code"] < b["code"] ? 1 : -1;
   });
+}   
+function pullPagesToTop() {
+  var components = getAll("ul#component-list li");
+  for (var i = components.length - 1; i >= 0; i--){
+    var data = JSON.parse(components[i].dataset.json);
+    if (data.child_components.length > 0) {
+      addClass(components[i], "page");
+      components[i].parentNode.insertBefore(components[i], get("#component-list").firstChild);
+    }
+  };
 }
 function makeComponentItem(t) {
   var el = make("li");
