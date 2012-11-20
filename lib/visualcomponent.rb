@@ -40,7 +40,7 @@ class VisualComponent
 		searchString = "[text()*='Jira Links']"
 		els = @component_html.search searchString
 		el = els.first       
-		el = el.parent if el.node_name == "b"               
+		el = get_parent_if_necessary(el, "b")
 		el.next_element.at_css("a.external-link")["href"] if el.next_element.at_css("a.external-link")
 	end 
 	
@@ -48,7 +48,7 @@ class VisualComponent
 		searchString = "[text()*='Design Screen-grab']"
 		els = @component_html.search searchString
 		el = els.first       
-		el = el.parent if el.node_name == "b"
+		el = get_parent_if_necessary(el, "b")
 		design = Array.new
 		while el.next_element.node_name != "h1"               
 			el = el.next_element
@@ -92,4 +92,10 @@ class VisualComponent
 		return "" unless el
 		el.next_element.inner_text.strip
 	end
+	
+	def get_parent_if_necessary(element, sought_node_name)
+	  puts "looking for '#{sought_node_name}' in #{element}" if $debug
+	  element = element.parent if element.node_name = sought_node_name
+	  element
+  end
 end
