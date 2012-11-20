@@ -6,6 +6,8 @@ require 'BBCFileFetcher.rb'
 require 'visualcomponent.rb'
 require 'explorer.rb'
 
+$debug = false
+
 # the page to start parsing from
 source_url = "https://confluence.dev.bbc.co.uk/display/unifiedplace/test"
 # css to target links to parse
