@@ -18,6 +18,7 @@ a:hover{text-decoration:none;}
     border: 1px dashed;
     height: 4em;
     line-height:1.7;
+    position:relative;
 }                           
 #component-list li:hover{background:#F7F3B9;}
 #component-list li span{
@@ -73,9 +74,24 @@ h2 {
 #component-name p{font-size:0.6em;margin:0px;}
 #breakpoint-container{position:fixed;bottom:0px;right:0px;font-size:0.7em;visibility:hidden;}
 #breakpoint-container a{padding:0px 4px;}
-#component-status{position:fixed;top:40px;right:-150px;padding:1em 4em;background:#FFBF00;
+#component-status{position:fixed;top:40px;right:-150px;padding:1em 4em;
   -webkit-transform: rotate(45deg); 
   -moz-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
   width:300px;text-align:center;}
+
+.circle {
+  border-radius: 50% 50% 50% 50%;
+  bottom: 5px;
+  height: 15px;
+  position: absolute;
+  right: 5px;
+  width: 15px;
+}
+div.draft,
+.draft .circle{background:#FFBF00;}
+div.for-review,
+.for-review .circle{background:#DD5252;}
+div.signed-off,
+.signed-off .circle{background:#54DD52;}

@@ -35,9 +35,9 @@ function sortComponentsByCode() {
 function makeComponentItem(t) {
   var el = make("li");
   var content = '<span><a class="code" href="' + t["url"] + '">' + t["code"] + "</a>";
-  content += t["name"] + "</span>";
+  content += t["name"] + "</span><div class='circle' title='" + t["status"] + "'>&nbsp;</li>";
   el.innerHTML = content;
-  el.className = t["status"].toLowerCase().trim();
+  el.className = t["status"].toLowerCase().trim().replace(" ", "-");
   el.setAttribute("data-json", JSON.stringify(t));
   el.addEventListener("click", showComponentDetail, false);
   return el;
