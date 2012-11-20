@@ -95,6 +95,8 @@ h2 {
 div.draft,
 .draft .circle{background:#FFBF00;}
 div.for-review,
-.for-review .circle{background:#DD5252;}
+.for-review .circle{background:#535ADB;color:#fff;}
 div.signed-off,
 .signed-off .circle{background:#54DD52;}
+div.unknown,
+.unknown .circle{background:#ff0000;}
