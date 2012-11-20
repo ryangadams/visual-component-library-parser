@@ -1,3 +1,20 @@
+function hasClass(ele,cls) {
+return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+}
+ 
+function addClass(ele,cls) {
+if (!this.hasClass(ele,cls)) ele.className += " "+cls;
+}
+ 
+function removeClass(ele,cls) {
+if (hasClass(ele,cls)) {
+var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+ele.className=ele.className.replace(reg,' ');
+}
+}
+/** previous three function lifted from http://snipplr.com/view/3561/addclass-removeclass-hasclass/ */
+
+
 var get = function(selector) {
   return document.querySelector(selector);
 };
@@ -58,6 +75,10 @@ function findComponentByName(name) {
 
 function showComponentDetail(e) {
   e.preventDefault();
+  for(var x=0;x<this.parentNode.children.length;x++) {
+      removeClass(this.parentNode.children[x], "active");
+  }
+  addClass(this, "active");
   hidePreviewPaneAndShowOverview();
   json = JSON.parse(this.getAttribute("data-json"));
   console.log(json);

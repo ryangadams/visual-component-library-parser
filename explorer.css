@@ -25,6 +25,7 @@ a:hover{text-decoration:none;}
   display:block;
   margin:2px;
 }
+#component-list li.active{border-style:solid;}
 .child-components li {position:relative;padding:4px 0;margin:2px 0;}
 .child-components li:hover{background:#FCF8C7;}
 .code{font-weight:bold;color:#00cc33;}
