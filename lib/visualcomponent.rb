@@ -28,7 +28,23 @@ class VisualComponent
 	end                      
 	def overview
 		get_element_after "h1[text()*='Overview']"
-	end              
+	end 
+
+	def child_components
+	  els  = @component_html.search "h1[text()*='List of components']"
+    return "" if els.length == 0
+		el   = els.first
+		el = el.next_element if el
+		# el is an <ol>
+    components = Array.new
+    links = el.children
+    link = links.first
+    while link.next_element
+      components.push link.content
+  		link = link.next_element
+	  end
+	  components
+	end             
 	
 	def user_story
 		get_element_after "h1[text()*='User Story']"
@@ -76,7 +92,8 @@ class VisualComponent
 			"overview" => overview,
 			"user_story" => user_story,
 			"cucumber" => cucumber_link,
-			"design" => design_grab
+			"design" => design_grab,
+			"child_components" => child_components
 		}.to_json
 	end
 	
