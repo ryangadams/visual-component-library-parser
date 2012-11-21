@@ -15,7 +15,18 @@ module LibraryExplorer
 			f.write('<script>var components = ' + json + ';</script></head>')
 			f.write('<body></body></html>')
 		}
+	end  
+	
+	def copy_to_dropbox
+		# assume dropbox directory is at ~/Dropbox
+		dropbox_folder = File.join(Dir.home, "Dropbox", "Public", "visual_component_library")
+		Dir.mkdir(dropbox_folder) unless File.directory?(dropbox_folder)
+		
+		FileUtils.cp("index.html", dropbox_folder)
+		FileUtils.cp("explorer.css", dropbox_folder)
+		FileUtils.cp("explorer.js", dropbox_folder)
+		
 	end
 	
-	module_function :render_html
+	module_function :render_html, :copy_to_dropbox
 end

@@ -37,4 +37,5 @@ doc.css(links).each do |link|
 	end
 end                                     
 
-LibraryExplorer.render_html(components)
+LibraryExplorer.render_html(components) 
+LibraryExplorer.copy_to_dropbox
