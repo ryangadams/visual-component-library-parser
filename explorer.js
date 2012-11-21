@@ -217,10 +217,10 @@ function showPreviewPaneAndHideOverview() {
   get("#component-summary").style.visibility = "hidden";
 }                                                          
 function addKey() {              
-  var key = '<p><div class="draft">&nbsp;</div>Draft</p>';
-  key += '<p><div class="for-review">&nbsp;</div>For Review</p>';
-  key += '<p><div class="signed-off">&nbsp;</div>Signed off</p>';
-  key += '<p><div class="unknown">&nbsp;</div>Unknown</p>';
+  var key = '<p><span class="draft">&nbsp;</span>Draft</p>';
+  key += '<p><span class="for-review">&nbsp;</span>For Review</p>';
+  key += '<p><span class="signed-off">&nbsp;</span>Signed off</p>';
+  key += '<p><span class="unknown">&nbsp;</span>Unknown</p>';
   buildAndAdd("div", "key", key);
 }
 

@@ -94,13 +94,28 @@ h2 {
   width: 15px;
 }
 div.draft,
+span.draft,
 .draft .circle{background:#FFBF00;}
 div.for-review,
+span.for-review,
 .for-review .circle{background:#535ADB;color:#fff;}
 div.signed-off,
+span.signed-off,
 .signed-off .circle{background:#54DD52;}
-div.unknown,
+div.unknown, 
+span.unknown, 
 .unknown .circle{background:#ff0000;}
 
-#key{position:fixed;right:0px;bottom:30px;border:1px solid #ccc;width:200px;background:#fff;}
-#key div{display:block;width:1em;height:1em;float:left;clear:left;border:1px solid #ccc;margin:0px 4px;}
+#key{position:fixed;right:-170px;bottom:0px;background:#fff;padding:10px;border:1px solid #ccc;width:200px;
+  border-width:1px 0 0 1px;
+  transition-property: right;
+  transition-duration: 0.4s;
+  transition-timing-function:ease;
+}                                            
+#key:hover{
+  right:0px;cursor:pointer;
+transition-property: right;
+transition-duration: 0.4s;
+transition-timing-function:ease;
+}                          
+#key span{display:block;width:1em;height:1em;float:left;clear:left;border:1px solid #ccc;margin:0px 4px;}
