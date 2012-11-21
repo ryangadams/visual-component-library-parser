@@ -11,7 +11,9 @@ Usage
 
 Then in ~/kandlcurriculum-visual-component-library/ you'll find a json file for each component from the library.
 
-It also attempts to put a copy of the compiled html, css and javascript in a folder called "visual_component_library" in your Dropbox Public folder. It assumes that you have Dropbox installed at ~/Dropbox.                    
+Most usefully, there's an html interface to the library generated for you (in the ~/visual-component-library folder).
+
+It also attempts to put a copy of the compiled html, css and javascript in a folder called "visual\_component\_library" in your Dropbox Public folder. It assumes that you have Dropbox installed at ~/Dropbox. If you want to remove that the method call to remove is the last line on build.rb.                    
 
 The downloaded confluence pages are cached in ~/.cachedbbcpages. The default lifetime is 1hr, cached files are not deleted.
 
