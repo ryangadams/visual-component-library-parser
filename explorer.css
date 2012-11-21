@@ -101,3 +101,6 @@ div.signed-off,
 .signed-off .circle{background:#54DD52;}
 div.unknown,
 .unknown .circle{background:#ff0000;}
+
+#key{position:fixed;right:0px;bottom:30px;border:1px solid #ccc;width:200px;background:#fff;}
+#key div{display:block;width:1em;height:1em;float:left;clear:left;border:1px solid #ccc;margin:0px 4px;}

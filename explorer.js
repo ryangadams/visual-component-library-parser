@@ -36,7 +36,8 @@ function load() {
   for (var i = components["components"].length - 1; i >= 0; i--){
     container.appendChild(makeComponentItem(components["components"][i]));
   };          
-  pullPagesToTop();
+  pullPagesToTop();  
+  addKey();
 }
 function buildAndAdd(element, id, innerHTML) {
   var el = get("#" + id);
@@ -214,6 +215,13 @@ function showPreviewPaneAndHideOverview() {
   get("#explorer").style.visibility = "visible";
   get("#breakpoint-container").style.visibility = "visible";
   get("#component-summary").style.visibility = "hidden";
+}                                                          
+function addKey() {              
+  var key = '<p><div class="draft">&nbsp;</div>Draft</p>';
+  key += '<p><div class="for-review">&nbsp;</div>For Review</p>';
+  key += '<p><div class="signed-off">&nbsp;</div>Signed off</p>';
+  key += '<p><div class="unknown">&nbsp;</div>Unknown</p>';
+  buildAndAdd("div", "key", key);
 }
 
 
