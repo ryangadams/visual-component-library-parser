@@ -217,10 +217,29 @@ function showPreviewPaneAndHideOverview() {
   get("#component-summary").style.visibility = "hidden";
 }                                                          
 function addKey() {              
-  var key = '<p><span class="draft">&nbsp;</span>Draft</p>';
-  key += '<p><span class="for-review">&nbsp;</span>For Review</p>';
-  key += '<p><span class="signed-off">&nbsp;</span>Signed off</p>';
-  key += '<p><span class="unknown">&nbsp;</span>Unknown</p>';
+  var counts = [0,0,0,0];  
+  var components = getAll("ul#component-list li");
+  for (var i = components.length - 1; i >= 0; i--){
+    var status = JSON.parse(components[i].dataset.json).status.trim().toLowerCase().replace(" ", "-");
+    switch (status) {
+      case "draft":
+        counts[0]++;
+        break;
+      case "for-review":
+        counts[1]++;
+        break;
+      case "signed-off":
+        counts[2]++;
+        break;
+      case "unknown":
+        counts[3]++;
+        break;
+    }
+  };
+  var key = '<p><span class="draft">&nbsp;</span>Draft ('+counts[0]+')</p>';
+  key += '<p><span class="for-review">&nbsp;</span>For Review ('+counts[1]+')</p>';
+  key += '<p><span class="signed-off">&nbsp;</span>Signed off ('+counts[2]+')</p>';
+  key += '<p><span class="unknown">&nbsp;</span>Unknown ('+counts[3]+')</p>';
   buildAndAdd("div", "key", key);
 }
 
