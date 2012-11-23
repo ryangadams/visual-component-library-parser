@@ -10,6 +10,7 @@ module LibraryExplorer
 
 		File.open("index.html","w") { |f| 
 			f.write('<!DOCTYPE html><html><head><meta charset="UTF-8">')
+			f.write('<title>Visual Component Library Explorer</title>')
 			f.write('<script src="explorer.js"></script>')
 			f.write('<link rel="stylesheet" href="explorer.css" />')
 			f.write('<script>var components = ' + json + ';</script></head>')
