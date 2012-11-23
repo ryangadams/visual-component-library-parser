@@ -11,6 +11,8 @@ a:hover{text-decoration:none;}
   padding:10px 0px;
   background:#efefef;
 }
+
+#built-on{margin:3px;text-align:center;width:15em;}
 #component-list li{
     font-size: 70%;
     margin: 4px;

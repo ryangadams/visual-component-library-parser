@@ -13,7 +13,7 @@ module LibraryExplorer
 			f.write('<script src="explorer.js"></script>')
 			f.write('<link rel="stylesheet" href="explorer.css" />')
 			f.write('<script>var components = ' + json + ';</script></head>')
-			f.write('<body></body></html>')
+			f.write('<body><p id="built-on">Built on: ' + Time.now.localtime.strftime("%Y-%m-%d %H:%M") + '</body></html>')
 		}
 	end  
 	
