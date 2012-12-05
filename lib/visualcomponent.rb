@@ -74,13 +74,27 @@ class VisualComponent
 	end          
 	
 	def status             
-		searchString = ".infoMacro td b[text()*='Status']"
+    the_status = _status("tipMacro")
+    if the_status  == "" 
+      the_status = _status("infoMacro")
+    end
+    the_status
+	end
+	def _status(search_string)
+	  searchString = ".#{search_string} td b[text()*='Status']"
 		els = @component_html.search searchString
+		the_status = ""
+		begin
 		el = els.first
 		el = el.next_sibling
 		el = el.next_sibling if el.node_name == "br"
-		el.inner_text.strip
-	end
+		el = el.next_sibling if el.inner_text.strip == ""
+		the_status = el.inner_text.strip
+	  rescue 
+	    the_status = ""
+    end
+    the_status
+  end
 
 	def to_json
 		{     
