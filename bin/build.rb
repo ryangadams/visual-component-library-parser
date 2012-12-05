@@ -7,7 +7,8 @@ require 'visualcomponent.rb'
 require 'explorer.rb'
 
 $debug = false
-
+$red = "\033[31m"
+$endred = "\033[0m"
 # the page to start parsing from
 source_url = "https://confluence.dev.bbc.co.uk/display/unifiedplace/test"
 # css to target links to parse
@@ -30,7 +31,7 @@ doc.css(links).each do |link|
 		File.open("#{component_file}", "w") { |f| f.write(component.to_json) }
 		components.push component
 	rescue
-		puts "\033[31m" + $!.message + "\033[0m" # in red
+		puts $red + $!.message + $endred  # in red
 	end
 end                                     
 
