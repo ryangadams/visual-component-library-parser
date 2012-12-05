@@ -1,3 +1,6 @@
+require "rubygems"
+require "bundler/setup"
+
 require 'pathname'
 $:.unshift File.join(File.dirname(Pathname.new($0).realpath.to_s), '../lib')
 require 'nokogiri'
@@ -35,4 +38,5 @@ doc.css(links).each do |link|
 	end
 end                                     
 
-LibraryExplorer.render_html(components)
+LibraryExplorer.render_html(components) 
+LibraryExplorer.copy_to_dropbox

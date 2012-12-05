@@ -35,7 +35,9 @@ function load() {
   sortComponentsByCode();
   for (var i = components["components"].length - 1; i >= 0; i--){
     container.appendChild(makeComponentItem(components["components"][i]));
-  };
+  };          
+  pullPagesToTop();  
+  addKey();
 }
 function buildAndAdd(element, id, innerHTML) {
   var el = get("#" + id);
@@ -52,6 +54,16 @@ function sortComponentsByCode() {
   components["components"].sort(function(a, b){
     return a["code"] < b["code"] ? 1 : -1;
   });
+}   
+function pullPagesToTop() {
+  var components = getAll("ul#component-list li");
+  for (var i = components.length - 1; i >= 0; i--){
+    var data = JSON.parse(components[i].dataset.json);
+    if (data.child_components.length > 0) {
+      addClass(components[i], "page");
+      components[i].parentNode.insertBefore(components[i], get("#component-list").firstChild);
+    }
+  };
 }
 function makeComponentItem(t) {
   var el = make("li");
@@ -203,6 +215,32 @@ function showPreviewPaneAndHideOverview() {
   get("#explorer").style.visibility = "visible";
   get("#breakpoint-container").style.visibility = "visible";
   get("#component-summary").style.visibility = "hidden";
+}                                                          
+function addKey() {              
+  var counts = [0,0,0,0];  
+  var components = getAll("ul#component-list li");
+  for (var i = components.length - 1; i >= 0; i--){
+    var status = JSON.parse(components[i].dataset.json).status.trim().toLowerCase().replace(" ", "-");
+    switch (status) {
+      case "draft":
+        counts[0]++;
+        break;
+      case "for-review":
+        counts[1]++;
+        break;
+      case "signed-off":
+        counts[2]++;
+        break;
+      case "unknown":
+        counts[3]++;
+        break;
+    }
+  };
+  var key = '<p><span class="draft">&nbsp;</span>Draft ('+counts[0]+')</p>';
+  key += '<p><span class="for-review">&nbsp;</span>For Review ('+counts[1]+')</p>';
+  key += '<p><span class="signed-off">&nbsp;</span>Signed off ('+counts[2]+')</p>';
+  key += '<p><span class="unknown">&nbsp;</span>Unknown ('+counts[3]+')</p>';
+  buildAndAdd("div", "key", key);
 }
 
 

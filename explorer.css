@@ -11,6 +11,8 @@ a:hover{text-decoration:none;}
   padding:10px 0px;
   background:#efefef;
 }
+
+#built-on{margin:3px;text-align:center;width:15em;}
 #component-list li{
     font-size: 70%;
     margin: 4px;
@@ -26,6 +28,7 @@ a:hover{text-decoration:none;}
   margin:2px;
 }
 #component-list li.active{border-style:solid;}
+#component-list li.page{border-color:#cc0033;}
 .child-components li {position:relative;padding:4px 0;margin:2px 0;}
 .child-components li:hover{background:#FCF8C7;}
 .code{font-weight:bold;color:#00cc33;}
@@ -93,8 +96,28 @@ h2 {
   width: 15px;
 }
 div.draft,
+span.draft,
 .draft .circle{background:#FFBF00;}
 div.for-review,
-.for-review .circle{background:#DD5252;}
+span.for-review,
+.for-review .circle{background:#535ADB;color:#fff;}
 div.signed-off,
+span.signed-off,
 .signed-off .circle{background:#54DD52;}
+div.unknown, 
+span.unknown, 
+.unknown .circle{background:#ff0000;}
+
+#key{position:fixed;right:-170px;bottom:0px;background:#fff;padding:10px;border:1px solid #ccc;width:200px;
+  border-width:1px 0 0 1px;
+  transition-property: right;
+  transition-duration: 0.4s;
+  transition-timing-function:ease;
+}                                            
+#key:hover{
+  right:0px;cursor:pointer;
+transition-property: right;
+transition-duration: 0.4s;
+transition-timing-function:ease;
+}                          
+#key span{display:block;width:1em;height:1em;float:left;clear:left;border:1px solid #ccc;margin:0px 4px;}
